@@ -1,0 +1,62 @@
+Write a proxy for the hue lamp
+
+Fresh machine
+
+zypper in salt-proxy
+
+The proxy is called proxy1
+
+On proxy1, add a file /etc/salt/proxy:
+
+master: master
+
+On the master, create a file /srv/pillar/top.sls:
+
+base:
+  'proxy1':
+   - proxy1
+
+Create a file "proxy1.sls":
+
+proxy:
+  proxytype: hue_bridge
+  bridge_url: Philips-hue
+  api_user: newdeveloper
+
+On proxy1:
+  
+salt-proxy --proxyid=proxy1 -l debug
+
+Accept the key:
+
+on master:
+
+salt-key -a proxy1
+
+(this will only work after the below has been added as well)
+
+Hacky:
+
+on proxy1
+
+md /hue
+
+cd /hue
+
+touch hue_bridge.py
+
+cd /usr/lib/python2.7/site-packages/salt/proxy/
+
+ln -s /hue/hue_bridge.py ./
+
+make sure we have requests:
+
+zypper in python-requests (seems to be a dependency of something else anyway)
+
+Put the hue_bridge.py code in
+
+Works!
+
+
+
+
