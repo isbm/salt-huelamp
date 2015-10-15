@@ -13,27 +13,27 @@ You can use it in "production" (at your home, e.g.) or for the demo purposes.
 
 On the Proxy Minion:
 
-1. Create the following file:
+- Create the following file: `/etc/salt/proxy`
 
-   /etc/salt/proxy
-
-2. Add there the followinf content:
-
+- Add there the followinf content:
+```
    master: yourhost.domain.name
-
+```
 
 On the Master configure pillar (e.g. if your pillars are /srv/salt/pillar/...):
 
-- In the /srv/salt/pillar/top.sls:
-
+- In the `/srv/salt/pillar/top.sls`:
+```
   base:
     'myminion':
        - myminion
+```
 
-- In the /srv/salt/pillar/myminion.sls:
-
+- In the `/srv/salt/pillar/myminion.sls`:
+```
   proxy:
     proxytype: philips_hue
+```
 
 After this:
 
