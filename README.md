@@ -33,6 +33,8 @@ On the Master configure pillar (e.g. if your pillars are /srv/salt/pillar/...):
 ```
   proxy:
     proxytype: philips_hue
+    user: newdeveloper
+    host: IP.ADDR.OF.THE.HUE.BRIDGE
 ```
 
 After this:
