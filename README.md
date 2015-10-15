@@ -19,7 +19,7 @@ On the Proxy Minion:
 
 2. Add there the followinf content:
 
-   master: <yourhost>
+   master: yourhost.domain.name
 
 
 On the Master configure pillar (e.g. if your pillars are /srv/salt/pillar/...):
