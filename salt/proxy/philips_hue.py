@@ -514,3 +514,31 @@ def call_temperature(*args, **kwargs):
         res[dev_id] = _set(dev_id, {"ct": value})
 
     return res
+
+
+def call_set(*args, **kwargs):
+    '''
+    Set JSON parameters directly. This is a low-level call.
+
+    Arguments:
+
+    * **id**: Specifies a device ID. Can be a comma-separated values. All, if omitted.
+
+    CLI Example:
+
+    .. code-block:: bash
+
+        salt '*' hue.set id=1 foo=bar anything=else
+        salt '*' hue.set id=1,2,3 foo=bar anything=else
+    '''
+    if 'id' not in kwargs:
+        raise CommandExecutionError("Parameter 'id' expected")
+
+    res = dict()
+    devices = _get_lights()
+    state = kwargs.copy()
+    state.pop('id')
+    for dev_id in 'id' not in kwargs and sorted(devices.keys()) or _get_devices(kwargs):
+        res[dev_id] = _set(dev_id, state)
+
+    return res
